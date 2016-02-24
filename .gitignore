@@ -1,0 +1,11 @@
+/app/fabric.properties
+/.idea
+/app/src/main/res/values/private_keys.xml
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures

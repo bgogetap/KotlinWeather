@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">KotlinWeather</string>
+    <string name="open_weather_map_base_url">http://api.openweathermap.org/</string>
+    <string name="refresh">Refresh</string>
+    <string name="use_location">Use Location</string>
+    <string name="search_for_city">Search for City</string>
+    <string name="location_rationale_title">Location permission is required</string>
+    <string name="location_rationale_message">KotlinWeather needs access to your GPS to provide you with location-based weather information</string>
+    <string name="cant_provide_location_based_weather">Cannot provide location-based weather without the Location Permission</string>
+    <string name="temp_max_format">Max: %1$d&#176;</string>
+    <string name="temp_min_format">Min: %1$d&#176;</string>
+    <string name="forecast_format">Forecast for %1$s</string>
+</resources>
