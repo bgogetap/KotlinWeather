@@ -3,6 +3,7 @@ package com.cultureoftech.kotlinweather.details
 import com.cultureoftech.kotlinweather.dagger.ForDetails
 import dagger.Module
 import dagger.Provides
+import retrofit2.Retrofit
 import java.text.SimpleDateFormat
 import javax.inject.Named
 
@@ -22,5 +23,10 @@ class DetailsModule(val cityId: Long, val cityName: String?) {
 
     @Provides @ForDetails fun provideDateFormatter(): SimpleDateFormat {
         return SimpleDateFormat("EEE, MMM d")
+    }
+
+    @Provides @ForDetails
+    fun provideWeatherForecastService(retrofit: Retrofit): WeatherForecastService {
+        return retrofit.create(WeatherForecastService::class.java)
     }
 }
