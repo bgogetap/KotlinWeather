@@ -15,4 +15,7 @@ interface CityWeatherService {
 
     @GET("weather")
     fun getWeatherFromLocation(@Query("lat") lat: Double, @Query("lon") lon: Double) : Call<CityWeatherResponse>
+
+    @GET("weather")
+    fun getWeatherFromId(@Query("id") cityId: Long) : Call<CityWeatherResponse>
 }

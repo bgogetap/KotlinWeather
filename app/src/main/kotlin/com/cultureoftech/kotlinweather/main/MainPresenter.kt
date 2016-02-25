@@ -36,17 +36,23 @@ class MainPresenter @Inject constructor(
 
     private var data: CityWeatherResponse? = null
     private var city: String = ""
+    private var lastId: Long = -1L
 
     override fun viewAttached() {
         activityPresenter.registerResultDelegate(this)
         activityPresenter.resetToolbarMenu()
         city = sharedPrefs.getString("last_city", "Omaha")
+        lastId = sharedPrefs.getLong("last_city_id", -1L)
         loadData(false)
     }
 
     override fun loadData(forceRefresh: Boolean) {
         if (data == null || forceRefresh) {
-            loadDataForCity(city)
+            if (lastId != -1L) {
+                loadDataForCityId()
+            } else {
+                loadDataForCity(city)
+            }
         } else {
             setData()
         }
@@ -54,7 +60,6 @@ class MainPresenter @Inject constructor(
 
     override fun loadDataForCity(city: String) {
         val query = city.replace(" ", "_")
-        sharedPrefs.edit().putString("last_city", query)
         loader.getWeatherForCity(query).subscribe({
             Timber.d(it.toString())
             data = it
@@ -62,11 +67,18 @@ class MainPresenter @Inject constructor(
         }, { Timber.e("Error loading weather", it.message) })
     }
 
+    private fun loadDataForCityId() {
+        loader.getWeatherForCityId(lastId).subscribe({
+            Timber.d(it.toString())
+            data = it
+            setData()
+        }, { Timber.e("Error loading weather from ID", it.message) })
+    }
+
     override fun loadDataForLocation(location: Location) {
         loader.getWeatherForLocation(location.latitude, location.longitude).subscribe({
             Timber.d(it.toString())
             data = it
-            sharedPrefs.edit().putString("last_city", it.name)
             setData()
         }, { Timber.e("Error loading weather from location", it.message) })
     }
@@ -80,6 +92,10 @@ class MainPresenter @Inject constructor(
     }
 
     private fun setData() {
+        sharedPrefs.edit().putString("last_city", data?.name).apply()
+        sharedPrefs.edit().putLong("last_city_id", lastId).apply()
+        lastId = data?.id ?: lastId
+        city = data?.name ?: city
         getView()?.setData(data)
     }
 

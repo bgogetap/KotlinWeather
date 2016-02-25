@@ -22,4 +22,10 @@ class WeatherLoader @Inject constructor(val service: CityWeatherService) {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
+
+    fun getWeatherForCityId(cityId: Long): Observable<CityWeatherResponse> {
+        return Observable.fromCallable({ service.getWeatherFromId(cityId).execute().body() })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
 }
