@@ -23,6 +23,7 @@ class ForecastItemView(context: Context, screen: DetailsScreen): LinearLayout(co
     init {
         LayoutInflater.from(context).inflate(R.layout.forecast_item, this, true)
         orientation = LinearLayout.VERTICAL
+        screen.component()?.inject(this)
         formatter = screen.component()?.simpleDateFormat()!!
     }
 
