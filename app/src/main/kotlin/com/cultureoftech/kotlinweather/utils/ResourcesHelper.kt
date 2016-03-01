@@ -1,6 +1,7 @@
 package com.cultureoftech.kotlinweather.utils
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 
 @Suppress("DEPRECATION")
 /**
@@ -13,6 +14,14 @@ object ResourcesHelper {
             return context.resources.getColor(colorRes)
         } else {
             return context.getColor(colorRes)
+        }
+    }
+
+    fun getDrawable(context: Context, drawableRes: Int): Drawable {
+        if (VersionHelper.isBelowLollipop()) {
+            return context.resources.getDrawable(drawableRes)
+        } else {
+            return context.getDrawable(drawableRes)
         }
     }
 }

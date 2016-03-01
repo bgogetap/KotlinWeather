@@ -10,4 +10,8 @@ object VersionHelper {
     fun isBelowMarshmallow(): Boolean {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.M
     }
+
+    fun isBelowLollipop(): Boolean {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP
+    }
 }
