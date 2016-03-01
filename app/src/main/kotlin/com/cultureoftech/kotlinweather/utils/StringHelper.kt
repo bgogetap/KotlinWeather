@@ -14,7 +14,7 @@ class StringHelper @Inject constructor(val context: Context) {
         return context.getString(resId)
     }
 
-    fun getString(resId: Int, varargs: Any): String {
-        return context.getString(resId, varargs)
+    fun getString(resId: Int, vararg args: Any): String {
+        return context.getString(resId, args)
     }
 }
