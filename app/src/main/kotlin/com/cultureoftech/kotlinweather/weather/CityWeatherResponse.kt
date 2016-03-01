@@ -7,15 +7,13 @@ data class CityWeatherResponse(
         val name: String,
         val id: Long,
         val cod: Long,
-//        val weather: Weather, // TODO Gson parsing issue?
+        val weather: Array<WeatherItem>,
         val main: Main,
         val wind: Wind,
         val clouds: Clouds,
         val sys: Sys) {
 
     data class Main(val temp: Double, val pressure: Double, val humidity: Double, val temp_min: Double, val temp_max: Double)
-
-    data class Weather(val items: Array<WeatherItem>)
 
     data class WeatherItem(val id: Long, val main: String, val description: String, val icon: String)
 
